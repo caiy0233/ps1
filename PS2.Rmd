@@ -1,0 +1,38 @@
+---
+title: "PS2 MACHINE LEARNING"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## IMPORT PACKAGES
+
+```{r ECHO = FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+## 
+
+```{r}
+y <- sample(1:100,200, replace = TRUE)
+q_pool <- c(1:100)
+exp_rho <- function(y,q,tau = 0.5){
+  sum((y-q)*(tau - as.numeric(y-q<0)))/100
+}
+tb <- data.frame(q = integer(), loss = double())
+colnames(tb) <- c("q","loss")
+for (q in q_pool){
+  tb <- rbind(tb,c(q,exp_rho(y,q)))
+}
+ggplot(tb,aes(x=q,y=loss)) + geom_point()+geom_smooth()
+```
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
